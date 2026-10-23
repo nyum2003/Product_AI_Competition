@@ -2,6 +2,14 @@
 
 A working student-team kickoff MVP: assignment → grounded workstreams → three editable allocations → shared availability poll → confirmed meeting.
 
+## Public browser demo
+
+Open https://nyum2003.github.io/Product_AI_Competition/ . The GitHub Pages demo runs entirely in the browser and now extracts workstreams from custom pasted text, instead of using a fixed customer-churn plan. It preserves source sentences, identifies familiar analytics workstreams and other explicit action sentences, flags negative constraints and unclear prompts, and carries the same tasks through all three allocations and the meeting-purpose suggestion.
+
+This is **text-based interpretation, not AI**. Effort and stage labels are editable suggestions. It may miss requirements or split them imperfectly; review the breakdown. It sends no assignment text to an AI provider. Plans and poll responses remain local to each visitor's browser. PDF uploads and multi-device collaboration require the Python app below. Existing saved demo projects retain their previous breakdown; start a new project to use the updated interpreter.
+
+Run `python build_demo.py` and `python build_pages.py` to regenerate the static files. Publish `docs/` through GitHub Pages. Run `node tests/test_demo.mjs` for custom-text demo checks. Real LLM interpretation requires a separately hosted backend and a provider API key; the optional Python integration below is not active on GitHub Pages.
+
 ## Run locally
 
 Python 3.11+ is required. No Node.js or frontend build is needed.
