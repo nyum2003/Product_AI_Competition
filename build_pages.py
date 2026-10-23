@@ -1,6 +1,7 @@
 """Package the browser demo for GitHub Pages, including project-site paths."""
 from pathlib import Path
 import shutil
+import hashlib
 
 root = Path(__file__).parent
 source, target = root / 'demo', root / 'docs'
@@ -24,5 +25,10 @@ for name in ('index.html', 'app.js', 'style.css', 'fixtures.js', 'demo.js'):
         text = text.replace("const match=location.pathname.match(/^\\/(project|poll)\\/([\\w-]+)$/);", "const query=new URLSearchParams(location.search);const view=query.get('view'),id=query.get('id');const match=['project','poll'].includes(view)&&/^[\\w-]+$/.test(id||'')?['',view,id]:null;")
         text = text.replace("history.replaceState(null,'',location.pathname)", "history.replaceState(null,'',location.pathname+location.search)")
     (target / name).write_text(text, encoding='utf-8')
+html=(target/'index.html').read_text(encoding='utf-8')
+for asset in ('app.js','demo.js','fixtures.js','style.css'):
+    version=hashlib.sha256((target/asset).read_bytes()).hexdigest()[:12]
+    html=html.replace(f'./{asset}"',f'./{asset}?v={version}"')
+(target/'index.html').write_text(html,encoding='utf-8')
 (target / '.nojekyll').write_text('', encoding='utf-8')
 print('GitHub Pages demo ready in docs/; existing documents preserved.')
