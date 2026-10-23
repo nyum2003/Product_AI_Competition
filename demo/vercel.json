@@ -1,0 +1,15 @@
+{
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/project/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/poll/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
